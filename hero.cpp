@@ -27,8 +27,9 @@ string hero::getName() const {return name;}
 void hero::increaserage() {
     currage++;
     if (currage > rager)
-        currage = reger;
+        currage = rager;
 }
+
 
 bool hero::canusespecial() const {
     return currage >= reger;
