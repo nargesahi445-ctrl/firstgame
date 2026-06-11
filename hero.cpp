@@ -12,6 +12,11 @@ void hero::takeDamage(int damage) {
     if (hp<0) hp = 0;
 }
 
+void hero::decreasehp(int amount) {
+    hp -= amount;
+    if (hp < 0) hp = 0;
+}
+
 bool hero::heal(int amount) {
     hp += amount;
 
