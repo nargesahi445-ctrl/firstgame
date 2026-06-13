@@ -1,8 +1,8 @@
 #include "hero.hpp"
 using namespace std;
 
-hero::hero(string name,int hp,int energy) :
-    name(name) , hp(hp) , rage(0) , energy(energy) {}
+hero::hero(string name,int hp,int rager) :
+    name(name) , hp(hp) , rage(0) , rager(rager) , currage(0) {}
 
 hero::~hero() {}
 
@@ -12,12 +12,7 @@ void hero::takeDamage(int damage) {
     if (hp<0) hp = 0;
 }
 
-void hero::decreasehp(int amount) {
-    hp -= amount;
-    if (hp < 0) hp = 0;
-}
-
-bool hero::heal(int amount) {
+void hero::heal(int amount) {
     hp += amount;
 
     if(hp > maxhp) hp = maxhp;
@@ -25,7 +20,7 @@ bool hero::heal(int amount) {
 
 bool hero::isAlive() const {return hp > 0;}
 
-int hero::getHp() const {return hp;}
+int hero::getHP() const {return hp;}
 
 string hero::getName() const {return name;}
 
@@ -37,7 +32,7 @@ void hero::increaserage() {
 
 
 bool hero::canusespecial() const {
-    return currage >= reger;
+    return currage >= rager;
 }
 
 void hero::resetrage() {currage = 0;}

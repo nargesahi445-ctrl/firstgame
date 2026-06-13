@@ -1,6 +1,6 @@
 #pragma once
 #include "hero.hpp"
-include <string>
+#include <string>
 
 class WhiteDoctor : public hero
 {
