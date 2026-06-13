@@ -16,7 +16,7 @@ class hero {
         virtual ~hero() = default;
 
         virtual void ability1(hero& enemyTarget, hero& allyTarget) = 0;
-        virtual void ability2(hero& enemyTarget, hero& allyTarget) = 0;
+        virtual void ability2(hero& enemyTarget, hero& allyTarget , game& , int ) = 0;
         virtual void specialability(hero& enemyTarget, hero& allyTarget) = 0;
 
         void takeDamage(int amount);
