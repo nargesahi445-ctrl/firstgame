@@ -1,3 +1,5 @@
+#pragma once
+#include "team.hpp"
 #include<iostream>
 using namespace std;
 

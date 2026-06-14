@@ -31,14 +31,14 @@ bool team::hasAlive() const{
     return false;
 }
 
-void team::lowestone() {
+hero* team::getlowestone() {
     her* lowest = nullptr;
 
     for (auto h : heroes) {
         if(!h->isAlive()) 
             continue;
 
-        if (lowest == nullptr || h->gerHP< lowest->getHP()) {
+        if (lowest == nullptr || h->getHP() < lowest->getHP()) {
             lowest = h;
         }
     }

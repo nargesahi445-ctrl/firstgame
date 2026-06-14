@@ -1,4 +1,6 @@
+#pragma once
 #include<iostream>
+#include "game.hpp"
 using namespace std;
 
 class hero {

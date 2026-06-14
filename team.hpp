@@ -1,10 +1,9 @@
 #pragma once
-
 #include<iostream>
 #include<vector>
-#include "hero.hpp"
-
 using namespace std;
+
+class hero;
 
 class team {
     private:
