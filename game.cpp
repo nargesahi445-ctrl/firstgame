@@ -1,5 +1,18 @@
 #include "game.hpp"
 
+
+int game::getround(){return round;}
+
+bool game::roundhasended(int roundnum)
+{
+    int endround = getround() + roundnum;
+    if (endround == getround())
+    {
+        return true;
+    }
+    return false;
+}
+
 void game::choosehero() {
     cout << "player1 choose your hero\n"; //من نخوندم سند رو کامل که باید متن ها چی باشه دقیقا یا پلیر ها بلاید اسم داشته باشن یا نه خودت اینجاهارو چک کن
     player1.addhero();
