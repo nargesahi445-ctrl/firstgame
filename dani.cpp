@@ -34,7 +34,7 @@ void danigolang::ability2(hero& enemyTarget, team& enemyteam, team& myteam) {
     myteam.decrease_energy(4);
 }
 
-void danigolang::specialability(hero& enemyTarget, hero& allyTarget , team& myteam) {
+void danigolang::specialability(hero& enemyTarget, hero& allyTarget , team& myteam , game& currentGame) {
     if (this->get_energy() < 4) return;
 
     if(!canusespecial())

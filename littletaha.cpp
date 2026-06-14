@@ -45,7 +45,7 @@ void Ltaha:: ability2(hero& enemyTarget, hero& allyTarget, game& currentGame , i
     }
 } // not sure about this function (managing rounds) i need to check again
 
-void Ltaha:: specialability(hero& enemyTarget, hero& allyTarget)
+void Ltaha:: specialability(hero& enemyTarget, hero& allyTarget , team& enemyteam, team& myteam, game& currentGame)
 {
     allyTarget.resetrage();
     if (!canusespecial()) {

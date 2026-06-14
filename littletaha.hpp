@@ -12,5 +12,5 @@ class Ltaha :public hero
     bool counting_rage(hero&);
     void ability1(hero& enemyTarget, hero& allyTarget)override;
     void ability2(hero& enemyTarget, hero& allyTarget , game& , int)override;
-    void specialability(hero& enemyTarget, hero& allyTarget)override;
+    void specialability(hero& enemyTarget, hero& allyTarget ,  team& enemyteam, team& myteam, game&)override;
 };
