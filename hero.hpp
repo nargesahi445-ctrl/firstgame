@@ -4,8 +4,9 @@ using namespace std;
 class hero {
     private:
         string name;
+        int shield = 0;
+        int shieldTurn = 0;
         int hp;
-        int rage;
         int maxhp;
         int rager;
         int currage;
@@ -15,9 +16,9 @@ class hero {
 
         virtual ~hero() = default;
 
-        virtual void ability1(hero& enemyTarget, hero& allyTarget) = 0;
-        virtual void ability2(hero& enemyTarget, hero& allyTarget) = 0;
-        virtual void specialability(hero& enemyTarget, hero& allyTarget) = 0;
+        virtual void ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) = 0;
+        virtual void ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) = 0;
+        virtual void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) = 0;
 
         void takeDamage(int amount);
         void heal(int amount);
@@ -27,11 +28,11 @@ class hero {
         int getHP() const;
         std::string getName() const;
 
+        void addshield(int amount , int turn);
         void increaserage();
+        void updateshield();
         bool canusespecial() const;
         void resetrage();
     };
-
-
 
     

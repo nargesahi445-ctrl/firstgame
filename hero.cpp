@@ -2,11 +2,24 @@
 using namespace std;
 
 hero::hero(string name,int hp,int rager) :
-    name(name) , hp(hp) , rage(0) , rager(rager) , currage(0) {}
+    name(name) , hp(hp) , rage(0) , rager(rager) , currage(0) , maxhp(hp) {}
 
 hero::~hero() {}
 
 void hero::takeDamage(int damage) {
+
+    if (shield > 0) {
+        if (shield <= damage) {
+            sheild -= damage;
+            return;
+        }
+
+        if (shield > damage) {
+            damage -= shield;
+            shield = 0;
+        }
+    }
+
     hp -= damage;
 
     if (hp<0) hp = 0;
@@ -37,4 +50,17 @@ bool hero::canusespecial() const {
 
 void hero::resetrage() {currage = 0;}
 
+void hero::addshield(int amount , int turn) {
+    shield = amount;
+    shieldturn = turn;    
+}
+
+void hero::updateshield() {
+    if (shieldturn > 0) {
+        sheildturn--;
+        if (shieldturn == 0) {
+            shield = 0;
+        }
+    }
+}
 

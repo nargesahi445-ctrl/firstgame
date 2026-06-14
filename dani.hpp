@@ -1,0 +1,18 @@
+#pragma once
+#include "hero.hpp"
+#include "team.hpp"
+#include <string>
+
+using namespace std;
+
+class danigolang : public hero {
+    private:
+    string lastTargetName;
+    
+    public:
+    danigolang();
+    void ability1(hero& enemyTarget, team& enemyteam, team& myteam) override;
+    void ability2(hero& enemyTarget, team& enemyteam, team& myteam) override;
+    void specialability(hero& enemyTarget, hero& allyTarget ,team& myteam) override;
+};
+

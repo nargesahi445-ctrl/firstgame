@@ -33,6 +33,7 @@ void game::winner() {
         isOver = true;
     }
 }
+
 void game::startgame() {
     cout << "----game start----\n";
 
