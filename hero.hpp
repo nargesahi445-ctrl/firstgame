@@ -20,7 +20,7 @@ class hero {
 
         virtual void ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) = 0;
         virtual void ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& , int) = 0;
-        virtual void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) = 0;
+        virtual void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& currentGame) = 0;
 
 
         void takeDamage(int amount);
