@@ -6,6 +6,10 @@ hero::hero(string name,int hp,int rager) :
 
 hero::~hero() {}
 
+bool hero:: getIsHidden() const{return is_hidden;}
+
+void hero::setHidden(bool status){is_hidden = status;}
+
 void hero::takeDamage(int damage) {
 
     if (shield > 0) {

@@ -12,6 +12,7 @@ class hero {
         int maxhp;
         int rager;
         int currage;
+        bool is_hidden = false;
 
     public:
         hero(string name , int hp , int energy);
@@ -22,7 +23,8 @@ class hero {
         virtual void ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& , int) = 0;
         virtual void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& currentGame) = 0;
 
-
+        bool getIsHidden() const;
+        void setHidden(bool status);
         void takeDamage(int amount);
         void heal(int amount);
 
