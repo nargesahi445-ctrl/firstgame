@@ -5,14 +5,12 @@
 
 using namespace std;
 
-class danigolang : public hero {
+class aminimani : public hero {
     private:
-    string lastTargetName;
-    
+
     public:
-    danigolang();
+    aminimani();
     void ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) override;
     void ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& , int) override;
     void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) override;
 };
-
