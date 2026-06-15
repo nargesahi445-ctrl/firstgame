@@ -3,7 +3,7 @@
 aminimani::aminimani() : hero("amin imani" , 500 , 3) {};
 
 void aminimani::ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) {
-    if (this->myteam.get_energy() < 3) return;
+    if (myteam.get_energy() < 3) return;
 
     if (enemyTarget.getHP() <= 110)
         enemyTarget.takeDamage(110);
@@ -13,7 +13,7 @@ void aminimani::ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, t
 }
 
 void aminimani::ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& , int) {
-    if (this->myteam.get_energy() < 3) return;
+    if (myteam.get_energy() < 3) return;
 
     allyTarget.takeDamage(25);
 
@@ -21,8 +21,8 @@ void aminimani::ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, t
     myteam.decrease_energy(3);
 }
 
-void amiimani::specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) {
-    if (this->myteam.get_energy() < 4) return;
+void aminimani::specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam, game& currentGame) {
+    if (myteam.get_energy() < 4) return;
 
     int i = 0;
     for (auto e : enemyteam.getheroes()) {
@@ -30,9 +30,10 @@ void amiimani::specialability(hero& enemyTarget, hero& allyTarget ,team& enemyte
             e->takeDamage(250);
             i++;
         }
+    }
 
     int count = 0;
-    for (auto h : myteam.getHeroes()) {
+    for (auto h : myteam.getheroes()) {
         if (h->isAlive() && h != this && count < 2) {
             h->takeDamage(30);
             count++;

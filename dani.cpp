@@ -3,7 +3,7 @@
 danigolang::danigolang() : hero("dani golang" , 600 , 4) {};
 
 void danigolang::ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) {
-    if (this->myteam.get_energy() < 2) return;
+    if (myteam.get_energy() < 2) return;
 
    if (this->lastTargetName == enemyTarget.getName())
         enemyTarget.takeDamage(32);
@@ -14,29 +14,28 @@ void danigolang::ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, 
 }
 
 void danigolang::ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& , int) {
-    if (this->myteam.get_energy() < 2) return;
+    if (myteam.get_energy() < 2) return;
 
     enemyTarget.takeDamage(50);
 
-    heroes* mosthp = nullptr;
+    hero* mosthp = nullptr;
 
     for (auto h :enemyteam.getheroes()) {
         if(!h->isAlive()) 
             continue;
 
-        if (mosthp == nullptr || h->getHP > mosthp->getHP()) {
+        if (mosthp == nullptr || h->getHP() > mosthp->getHP()) {
             mosthp = h;
         }
     }
-    if (mosthp && mosthp != &enemytarget)
-        mosthp.takeDamage(50);
+    if (mosthp && mosthp != &enemyTarget)
+        mosthp->takeDamage(50);
 
     myteam.decrease_energy(4);
 }
 
-
-void danigolang::specialability(hero& enemyTarget, hero& allyTarget , team& myteam , game& currentGame) {
-    if (this->get_energy() < 4) return;
+void danigolang::specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam, game& currentGame) {
+    if (myteam.get_energy() < 4) return;
 
     if(!canusespecial())
         return;

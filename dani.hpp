@@ -14,6 +14,6 @@ class danigolang : public hero {
 
     void ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) override;
     void ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& , int) override;
-    void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) override
+    void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam, game& currentGame) override;
 };
 
