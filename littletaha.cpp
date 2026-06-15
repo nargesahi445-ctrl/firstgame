@@ -6,7 +6,7 @@ using namespace std;
 
 Ltaha:: Ltaha(team& newteam):hero("little taha" , 500 , 3) , myTeam(newteam){}
 
-void Ltaha:: ability1(hero& enemyTarget, hero& allyTarget)
+void Ltaha:: ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam)
 {
    hero * lowestTarget = myTeam.getlowestone();
    if (lowestTarget != nullptr)
@@ -21,7 +21,7 @@ void Ltaha:: ability1(hero& enemyTarget, hero& allyTarget)
    myTeam.decrease_energy(2);
 }
 
-void Ltaha:: ability2(hero& enemyTarget, hero& allyTarget, game& currentGame , int/*basedamage*/)
+void Ltaha:: ability2(hhero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam, game& currentGame , int/*basedamage*/)
 {
    static string activeHeroName = "";
     static int endRound = 0;
@@ -45,7 +45,7 @@ void Ltaha:: ability2(hero& enemyTarget, hero& allyTarget, game& currentGame , i
     }
 } // not sure about this function (managing rounds) i need to check again
 
-void Ltaha:: specialability(hero& enemyTarget, hero& allyTarget)
+void Ltaha:: specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam)
 {
     allyTarget.resetrage();
     if (!canusespecial()) {

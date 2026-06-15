@@ -8,7 +8,7 @@ using namespace std;
 
 WhiteDoctor::WhiteDoctor(team&hometeam) : hero("White Doctor", 550, 4) , myTeam(hometeam) {};
 
-void WhiteDoctor::ability1(hero& enemyTarget, hero& allyTarget) {
+void WhiteDoctor::ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) {
     cout << getName() << " uses asprin on " << enemyTarget.getName() << "!" << endl;
     enemyTarget.takeDamage(40);
 
@@ -18,7 +18,7 @@ void WhiteDoctor::ability1(hero& enemyTarget, hero& allyTarget) {
 
 }
 
-WhiteDoctor::ability2(hero& enemyTarget, hero& allyTarget , game& currentGame , basedamage) {
+void WhiteDoctor::ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& currentGame ,int basedamage) {
     cout << getName() << "uses doping " << endl;
     for (auto & h : heroes)
     {
@@ -50,7 +50,7 @@ WhiteDoctor::ability2(hero& enemyTarget, hero& allyTarget , game& currentGame , 
     }
 }
 
-void WhiteDoctor::specialability(hero& enemyTarget, hero& allyTarget) {
+void WhiteDoctor::specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) {
     if (!canusespecial()) {
         cout << "Not enough energy for Special Ability!" << endl;
         return;

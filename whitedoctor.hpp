@@ -9,8 +9,8 @@ class WhiteDoctor : public hero
     dopingduration= 0;
     public:
     WhiteDoctor(team &);
-    void ability1(hero& enemyTarget, hero& allyTarget) override;
-    void ability2(hero& enemyTarget, hero& allyTarget, game& currentGame , int basedamage) override;
-    void specialability(hero& enemyTarget, hero& allyTarget , ) override;
+    void ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) override;
+    void ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam, game& currentGame , int basedamage) override;
+    void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) override;
 
 };
