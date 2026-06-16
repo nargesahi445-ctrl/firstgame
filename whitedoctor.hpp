@@ -5,8 +5,10 @@
 
 class WhiteDoctor : public hero
 {
+    private:
     team& myTeam;
     int dopingduration= 0;
+    int doctorLastUsedRound = -4;
     public:
 
     WhiteDoctor(team&);
