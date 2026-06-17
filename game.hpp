@@ -16,4 +16,5 @@ class game {
     void playround();
     void startgame();
     void winner();
+    void handleUnhiding(team& myteam);
 };

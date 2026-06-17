@@ -13,6 +13,7 @@ class hero {
         int rager;
         int currage;
         bool is_hidden = false;
+        int targetround = -1;
 
     public:
         hero(string name , int hp , int energy);
@@ -22,7 +23,8 @@ class hero {
         virtual void ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) = 0;
         virtual void ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& , int) = 0;
         virtual void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& currentGame) = 0;
-
+        int getTargetRound() const;
+        void setTargetRound(int rounds);
         bool getIsHidden() const;
         void setHidden(bool status);
         void takeDamage(int amount);

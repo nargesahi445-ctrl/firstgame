@@ -6,12 +6,15 @@ hero::hero(string name,int hp,int rager) :
 
 hero::~hero() {}
 
+int hero::getTargetRound() const{return targetround;}
+void hero::setTargetRound(int rounds) {targetround = rounds;}
+
 bool hero:: getIsHidden() const{return is_hidden;}
 
 void hero::setHidden(bool status){is_hidden = status;}
 
 void hero::takeDamage(int damage) {
-
+    if (is_hidden) { return; }
     if (shield > 0) {
         if (shield <= damage) {
             sheild -= damage;

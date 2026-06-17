@@ -14,14 +14,20 @@ void Btaha::ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team&
     {
         if (enemyh != nullptr)
         {
+            bool wasHidden = enemyh->getIsHidden();
+            if (wasHidden) {enemyh->setHidden(false);}
             enemyh->takeDamage(30);
-            myteam.decrease_energy(3);
+            if (wasHidden) {
+                enemyh->setHidden(true);
+            }
+           
         }
         else 
         {
             cout << "enemy does not exist" << endl;
         }
     }
+    myteam.decrease_energy(3);
 }
 
 void  Btaha::ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game&mygame , int)
@@ -45,33 +51,12 @@ void  Btaha::ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team
     }
     enemyTarget.takeDamage(90);
 
-    int targetround = -1;
-    int currentround = mygame.getround();
-
-    
-   /* if (currentround == targetround) 
+    if (this->getTargetRound() == -1)
     {
-        this->setHidden(false);
-        allyteam.push_back(this);
-        targetround = -1;
-        return; 
-    }*/ // *************** << we should handle unhiding in game.cpp >>************8
-    if (targetround == -1)
-    {
-        targetround = currentround + 1;
-        this -> setHidden(true);
-        hiddenheroes.push_back(this);
-        for (auto it = allyteam.begin(); it != allyteam.end(); ++it)
-        {
-            if (*it == this) 
-            {
-                allyteam.erase(it);
-                break;     
-            } 
-        }
-    } // need to change 
-
- myteam. decrease_energy(4);
+        this->setHidden(true);
+        this->setTargetRound(0);
+    }
+    myteam.decrease_energy(4);
 }
 
 void Btaha::specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& currentGame)
