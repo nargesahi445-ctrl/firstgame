@@ -11,10 +11,20 @@ class game {
         bool isOver = false;
 
     public:
+<<<<<<< HEAD
         int getround();
         bool roundhasended(int roundnum);
         void choosehero();
         void playround();
         void startgame();
         void winner();
+=======
+    int getround();
+    bool roundhasended(int);
+    void choosehero();
+    void playround();
+    void startgame();
+    void winner();
+    void handleUnhiding(team& myteam);
+>>>>>>> c10774bbc7eb11e9092b8acc8c5de3fb76280376
 };

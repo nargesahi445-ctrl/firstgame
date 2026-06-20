@@ -77,3 +77,22 @@ void game::startgame() {
 
     cout << "----game over----\n";
 }
+
+void game::handleUnhiding(team& myteam){
+    vector<hero*>& teamheroes = myteam.getheroes();
+
+    for (auto h : teamheroes) 
+    {
+        if (h != nullptr && h->getIsHidden()) 
+        {
+            
+            if (h->getTargetRound() == 0) 
+            {
+                h->setHidden(false);
+                h->setTargetRound(-1);   
+                
+                cout << h->getName() << " is now unhidden!" << endl;
+            }
+        }
+    }
+}
