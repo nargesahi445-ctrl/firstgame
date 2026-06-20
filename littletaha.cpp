@@ -2,75 +2,62 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 using namespace std;
 
-Ltaha:: Ltaha(team& newteam):hero("little taha" , 500 , 3) , myTeam(newteam){}
+Ltaha::Ltaha(team& newteam) : hero("little taha", 500, 3), myTeam(newteam) {}
 
-void Ltaha:: ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam)
-{
-   hero * lowestTarget = myTeam.getlowestone();
-   if (lowestTarget != nullptr)
-   {
-    lowestTarget -> heal(20);
-   }
-   else 
-   {
-    cout << "we don't any alive hero" << endl;
-   }
-   enemyTarget.takeDamage(40);
-   myTeam.decrease_energy(2);
+void Ltaha::ability1(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam) {
+    if (myteam.get_energy() < 2) return;
+    
+    hero* lowestTarget = myTeam.getlowestone();
+    if (lowestTarget != nullptr) {
+        lowestTarget->heal(20);
+    }
+    
+    enemyTarget.takeDamage(40);
+    myTeam.decrease_energy(2);
 }
 
-void Ltaha:: ability2(hhero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam, game& currentGame , int/*basedamage*/)
-{
-   static string activeHeroName = "";
-    static int endRound = 0;
+void Ltaha::ability2(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame, int basedamage) {
+    if (myteam.get_energy() < 4) return;
+    
     int currentRound = currentGame.getround();
     string name = allyTarget.getName();
-    if (activeHeroName != name)
-    {
+    
+    if (activeHeroName != name) {
         activeHeroName = name;
         endRound = currentRound + 2;
     }
-    if (currentRound < endRound)
-    {
+    
+    if (currentRound < endRound) {
         allyTarget.heal(40);
-        //cout << name << " healed 40 hp in round " << currentRound << endl;
-    }
-    else 
-    {
-        myTeam.decrease_energy(4); 
+    } else {
         activeHeroName = "";
         endRound = 0;
+        myTeam.decrease_energy(4);
     }
-} // not sure about this function (managing rounds) i need to check again
+}
 
-void Ltaha:: specialability(hero& enemyTarget, hero& allyTarget , team& enemyteam, team& myteam, game& currentGame)
-{
-    allyTarget.resetrage();
+void Ltaha::specialability(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame) {
+    if (myteam.get_energy() < 4) return;
+    
     if (!canusespecial()) {
-        cout << "Not enough energy for Special Ability!" << endl;
+        cout << "Not enough rage for Special Ability!" << endl;
         return;
     }
 
-    do{
-        hero *lowesttarget = myTeam.getlowestone();
-        if (lowesttarget != nullptr)
-        {
-            lowesttarget -> heal(200);
-        }
-        else 
-        {
-            cout << "we don't any alive hero" << endl;
-        }
-        myTeam.decrease_energy(4);
-    }while (counting_rage(*this));
+    hero* lowestTarget = myTeam.getlowestone();
+    if (lowestTarget != nullptr) {
+        lowestTarget->heal(200);
+    }
+    
+    resetrage();
+    myTeam.decrease_energy(4);
 }
 
-bool Ltaha:: counting_rage(hero&target)
-{
-    if (!target.canusespecial())
-    {
+bool Ltaha::counting_rage(hero& target) {
+    if (!target.canusespecial()) {
         target.increaserage();
         return false;
     }

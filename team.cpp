@@ -8,9 +8,13 @@ void team::addhero(hero* h) {
     heroes.push_back(h);
 }
 
-vector<hero*>& team::getheroes() {return heroes;}
+vector<hero*>& team::getheroes() {
+    return heroes;
+}
 
-int team::get_energy() const {return energy;}
+int team::get_energy() const {
+    return energy;
+}
 
 void team::set_energy(int energy) {
     this->energy = energy;
@@ -18,12 +22,15 @@ void team::set_energy(int energy) {
 
 void team::decrease_energy(int amount) {
     energy -= amount;
-
     if (energy < 0)
         energy = 0;
 }
 
-bool team::hasAlive() const{
+void team::increase_energy(int amount) {
+    energy += amount;
+}
+
+bool team::hasAlive() const {
     for (auto h : heroes) {
         if (h->isAlive())
             return true;
@@ -31,14 +38,12 @@ bool team::hasAlive() const{
     return false;
 }
 
-void team::lowestone() {
-    her* lowest = nullptr;
-
+hero* team::getlowestone() {
+    hero* lowest = nullptr;
     for (auto h : heroes) {
-        if(!h->isAlive()) 
+        if (!h->isAlive())
             continue;
-
-        if (lowest == nullptr || h->gerHP< lowest->getHP()) {
+        if (lowest == nullptr || h->getHP() < lowest->getHP()) {
             lowest = h;
         }
     }

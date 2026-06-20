@@ -1,43 +1,61 @@
 #include "game.hpp"
+#include <iostream>
+using namespace std;
 
+int game::getround() {
+    return round;
+}
 
-int game::getround(){return round;}
-
-bool game::roundhasended(int roundnum)
-{
+bool game::roundhasended(int roundnum) {
     int endround = getround() + roundnum;
-    if (endround == getround())
-    {
+    if (endround == getround()) {
         return true;
     }
     return false;
 }
 
 void game::choosehero() {
-    cout << "player1 choose your hero\n"; //من نخوندم سند رو کامل که باید متن ها چی باشه دقیقا یا پلیر ها بلاید اسم داشته باشن یا نه خودت اینجاهارو چک کن
+    cout << "++player1 \nchoose your hero\n";
     player1.addhero();
-    cout << "";
+    cout << "++player2 \nchoose your hero\n";
     player2.addhero();
 }
 
-void game::playround(){
-    cout <<"----Round----"<< round << endl;
-    hero* h1 = player1.getheroes();
-    hero* h2 = player2.getheroes();
+void game::playround() {
+    cout << "----Round----" << round << endl;
+    
+    // Get first alive hero from each team
+    hero* h1 = nullptr;
+    hero* h2 = nullptr;
+    
+    for (auto h : player1.getheroes()) {
+        if (h->isAlive()) {
+            h1 = h;
+            break;
+        }
+    }
+    
+    for (auto h : player2.getheroes()) {
+        if (h->isAlive()) {
+            h2 = h;
+            break;
+        }
+    }
 
     if (h1 && h2) {
         cout << "player1 attacks!\n";
-        h1->ability1(*h2);
+        // Need proper ally target - using self for simplicity
+        h1->ability1(*h2, *h1, player2, player1);
 
         if (h2->isAlive()) {
             cout << "player2 attacks!\n";
-            h2->ability1(*h1);
+            h2->ability1(*h1, *h2, player1, player2);
         }
     }
 }
 
 void game::winner() {
-    if (!player1.hasALive()) {
+    if (!player1.hasAlive()) {
         cout << "player 2 is win\n";
         isOver = true;
     }
@@ -49,10 +67,9 @@ void game::winner() {
 
 void game::startgame() {
     cout << "----game start----\n";
-
     choosehero();
 
-    while(!isover) {
+    while (!isOver) {
         playround();
         winner();
         round++;

@@ -1,60 +1,55 @@
-
 #include "whitedoctor.hpp"
-#include "hero.hpp"
-#include "team.hpp"
-#include "game.hpp"
-#include <string>
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
-WhiteDoctor::WhiteDoctor(team&hometeam) : hero("White Doctor", 550, 4), myTeam(hometeam){};
+WhiteDoctor::WhiteDoctor(team& hometeam) : hero("White Doctor", 550, 4), myTeam(hometeam) {}
 
-void WhiteDoctor::ability1(hero& enemyTarget, hero& allyTarget) {
+void WhiteDoctor::ability1(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam) {
+    if (myteam.get_energy() < 3) return;
+    
     cout << getName() << " uses asprin on " << enemyTarget.getName() << "!" << endl;
     enemyTarget.takeDamage(40);
 
     cout << getName() << " heals " << allyTarget.getName() << " with asprin!" << endl;
-    allyTarget.heal(40);   
+    allyTarget.heal(40);
     myTeam.decrease_energy(3);
-
 }
 
-WhiteDoctor::ability2(hero& enemyTarget, hero& allyTarget , game& currentGame , basedamage) {
-    cout << getName() << "uses doping " << endl;
-    vector<hero*>& teamheroes = myTeam.getheroes();
-    for (auto & h : teamheroes)
-    {
-        if (h->getName() == allyTarget.getName())
-        {
-            int rounddamage = basedamage * 0.2;
-            dopingduration= 2;
-            if (dopingduration > 0) 
-            {
-            enemyTarget.takeDamage(rounddamage); 
+void WhiteDoctor::ability2(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame, int basedamage) {
+    if (myteam.get_energy() < 4) return;
     
-                if (currentGame.roundhasended(dopingduration)) 
-                {
+    cout << getName() << " uses doping " << endl;
+    vector<hero*>& teamheroes = myTeam.getheroes();
+    
+    for (auto& h : teamheroes) {
+        if (h->getName() == allyTarget.getName()) {
+            int rounddamage = basedamage * 0.2;
+            dopingduration = 2;
+            
+            if (dopingduration > 0) {
+                enemyTarget.takeDamage(rounddamage);
+                
+                if (currentGame.roundhasended(dopingduration)) {
                     dopingduration = 0;
                     rounddamage = 0;
-                }
-                else 
-                {
-                    dopingduration--; 
+                } else {
+                    dopingduration--;
                 }
             }
-            myTeam.decrease_energy(4);   
-        }
-        else 
-        {
-            cout << "hero does not exist" << endl;
+            myTeam.decrease_energy(4);
+            return;
         }
     }
+    cout << "hero does not exist" << endl;
 }
 
-void WhiteDoctor::specialability(hero& enemyTarget, hero& allyTarget) {
+void WhiteDoctor::specialability(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame) {
+    if (myteam.get_energy() < 4) return;
+    
     if (!canusespecial()) {
-        cout << "Not enough energy for Special Ability!" << endl;
+        cout << "Not enough rage for Special Ability!" << endl;
         return;
     }
 
@@ -62,11 +57,10 @@ void WhiteDoctor::specialability(hero& enemyTarget, hero& allyTarget) {
     vector<hero*>& teamHeroes = myTeam.getheroes();
     bool revivedSomeone = false;
 
-
     for (hero* h : teamHeroes) {
         if (h != this && !h->isAlive()) {
             cout << "\n[White Doctor]: \"Bring him to the table... he'll survive if he gets lucky.\"" << endl;
-            h->heal(200); 
+            h->heal(200);
             cout << h->getName() << " has been revived with 200 HP!" << endl;
             revivedSomeone = true;
             break;
@@ -76,7 +70,7 @@ void WhiteDoctor::specialability(hero& enemyTarget, hero& allyTarget) {
     if (revivedSomeone) {
         resetrage();
         myTeam.decrease_energy(4);
-        lastUsedRound = currentRound;
+        lastUsedRound = currentGame.getround();
     } else {
         cout << "No dead ally found to revive!" << endl;
     }
