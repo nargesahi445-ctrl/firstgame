@@ -4,30 +4,31 @@
 using namespace std;
 
 hero::hero(string name, int hp, int rager) :
-    name(name), hp(hp), rage(0), rager(rager), currage(0), maxhp(hp) {}
+    name(name), hp(hp), currage(0), rager(rager), maxhp(hp) {}
 
 hero::~hero() {}
 
-<<<<<<< HEAD
+int hero::getTargetRound() const {
+    return targetround;
+}
+
+void hero::setTargetRound(int rounds) {
+    targetround = rounds;
+}
+
 bool hero::getIsHidden() const {
     return is_hidden;
 }
-=======
-int hero::getTargetRound() const{return targetround;}
-void hero::setTargetRound(int rounds) {targetround = rounds;}
-
-bool hero:: getIsHidden() const{return is_hidden;}
->>>>>>> c10774bbc7eb11e9092b8acc8c5de3fb76280376
 
 void hero::setHidden(bool status) {
     is_hidden = status;
 }
 
 void hero::takeDamage(int damage) {
-<<<<<<< HEAD
-=======
-    if (is_hidden) { return; }
->>>>>>> c10774bbc7eb11e9092b8acc8c5de3fb76280376
+    if (is_hidden) { 
+        return; 
+    }
+    
     if (shield > 0) {
         if (shield >= damage) {
             shield -= damage;

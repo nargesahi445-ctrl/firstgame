@@ -23,18 +23,12 @@ class hero {
         hero(string name, int hp, int energy);
         virtual ~hero() = default;
 
-<<<<<<< HEAD
         virtual void ability1(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam) = 0;
         virtual void ability2(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame, int basedamage) = 0;
         virtual void specialability(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame) = 0;
-
-=======
-        virtual void ability1(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam) = 0;
-        virtual void ability2(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& , int) = 0;
-        virtual void specialability(hero& enemyTarget, hero& allyTarget ,team& enemyteam, team& myteam , game& currentGame) = 0;
+        
         int getTargetRound() const;
         void setTargetRound(int rounds);
->>>>>>> c10774bbc7eb11e9092b8acc8c5de3fb76280376
         bool getIsHidden() const;
         void setHidden(bool status);
         void takeDamage(int amount);

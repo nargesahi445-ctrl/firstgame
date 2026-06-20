@@ -70,11 +70,7 @@ void WhiteDoctor::specialability(hero& enemyTarget, hero& allyTarget, team& enem
     if (revivedSomeone) {
         resetrage();
         myTeam.decrease_energy(4);
-<<<<<<< HEAD
-        lastUsedRound = currentGame.getround();
-=======
-        doctorLastUsedRound = currentRound;
->>>>>>> c10774bbc7eb11e9092b8acc8c5de3fb76280376
+        doctorLastUsedRound = currentGame.getround();
     } else {
         cout << "No dead ally found to revive!" << endl;
     }
