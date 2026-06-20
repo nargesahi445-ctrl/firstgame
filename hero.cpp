@@ -6,8 +6,6 @@ using namespace std;
 hero::hero(string name, int hp, int rager) :
     name(name), hp(hp), currage(0), rager(rager), maxhp(hp) {}
 
-hero::~hero() {}
-
 int hero::getTargetRound() const {
     return targetround;
 }
@@ -24,11 +22,30 @@ void hero::setHidden(bool status) {
     is_hidden = status;
 }
 
+int hero::getRageCount() const {
+    return currage;
+}
+
 void hero::takeDamage(int damage) {
     if (is_hidden) { 
         return; 
     }
     
+    if (shield > 0) {
+        if (shield >= damage) {
+            shield -= damage;
+            return;
+        } else {
+            damage -= shield;
+            shield = 0;
+        }
+    }
+    
+    hp -= damage;
+    if (hp < 0) hp = 0;
+}
+
+void hero::takeGroupDamage(int damage) {
     if (shield > 0) {
         if (shield >= damage) {
             shield -= damage;
@@ -61,9 +78,10 @@ string hero::getName() const {
 }
 
 void hero::increaserage() {
-    currage++;
-    if (currage > rager)
-        currage = rager;
+    if (!usedThisRound && currage < rager) {
+        currage++;
+        usedThisRound = true;
+    }
 }
 
 bool hero::canusespecial() const {

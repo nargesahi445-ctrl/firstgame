@@ -1,9 +1,10 @@
 #pragma once
 #include<iostream>
 #include <string>
+#include <memory>
+#include <vector>
 using namespace std;
 
-// Forward declaration
 class team;
 class game;
 
@@ -18,6 +19,7 @@ class hero {
         int currage = 0;
         bool is_hidden = false;
         int targetround = -1;
+        bool usedThisRound = false;
 
     public:
         hero(string name, int hp, int energy);
@@ -32,14 +34,18 @@ class hero {
         bool getIsHidden() const;
         void setHidden(bool status);
         void takeDamage(int amount);
+        void takeGroupDamage(int amount);
         void heal(int amount);
         bool isAlive() const;
         int getHP() const;
         string getName() const;
+        int getRageCount() const;
         
         void addshield(int amount, int turn);
         void increaserage();
         void updateshield();
         bool canusespecial() const;
         void resetrage();
+        void resetUsedFlag() { usedThisRound = false; }
+        void setUsedThisRound(bool used) { usedThisRound = used; }
 };

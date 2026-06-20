@@ -5,7 +5,7 @@ aminimani::aminimani() : hero("amin imani", 500, 3) {}
 void aminimani::ability1(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam) {
     if (myteam.get_energy() < 3) return;
 
-    if (enemyTarget.getHP() <= 110) {
+    if (enemyTarget.getHP() <= 55) {
         enemyTarget.takeDamage(110);
     } else {
         enemyTarget.takeDamage(55);
@@ -23,6 +23,10 @@ void aminimani::ability2(hero& enemyTarget, hero& allyTarget, team& enemyteam, t
 
 void aminimani::specialability(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame) {
     if (myteam.get_energy() < 4) return;
+    
+    if (!canusespecial()) return;
+
+    cout << "\"یک... دو... سه... بوم... چه کسی موند؟ مهم نیست...\"" << endl;
 
     int i = 0;
     for (auto e : enemyteam.getheroes()) {
@@ -40,5 +44,6 @@ void aminimani::specialability(hero& enemyTarget, hero& allyTarget, team& enemyt
         }
     }
 
+    resetrage();
     myteam.decrease_energy(4);
 }

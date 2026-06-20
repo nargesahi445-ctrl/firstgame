@@ -1,9 +1,9 @@
-#include<iostream>
-
+#include <iostream>
+#include "game.hpp"
 using namespace std;
 
-int main () {
-    string line;
-    cout << " game start" ;
-    
+int main() {
+    game myGame;
+    myGame.startGame();
+    return 0;
 }

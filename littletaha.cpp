@@ -5,62 +5,63 @@
 
 using namespace std;
 
-Ltaha::Ltaha(team& newteam) : hero("little taha", 500, 3), myTeam(newteam) {}
+Ltaha::Ltaha() : hero("little taha", 500, 3) {}
 
 void Ltaha::ability1(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam) {
     if (myteam.get_energy() < 2) return;
     
-    hero* lowestTarget = myTeam.getlowestone();
+    hero* lowestTarget = myteam.getlowestone();
     if (lowestTarget != nullptr) {
         lowestTarget->heal(20);
+        cout << lowestTarget->getName() << " healed for 20 HP!" << endl;
     }
     
-    enemyTarget.takeDamage(40);
-    myTeam.decrease_energy(2);
+    enemyTarget.takeDamage(30);
+    myteam.decrease_energy(2);
 }
 
 void Ltaha::ability2(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame, int basedamage) {
     if (myteam.get_energy() < 4) return;
     
-    int currentRound = currentGame.getround();
-    string name = allyTarget.getName();
+    healingTarget = allyTarget.getName();
+    healingRoundsLeft = 2;
     
-    if (activeHeroName != name) {
-        activeHeroName = name;
-        endRound = currentRound + 2;
-    }
-    
-    if (currentRound < endRound) {
-        allyTarget.heal(40);
-    } else {
-        activeHeroName = "";
-        endRound = 0;
-        myTeam.decrease_energy(4);
-    }
+    cout << getName() << " starts healing " << allyTarget.getName() << " for 2 rounds!" << endl;
+    myteam.decrease_energy(4);
 }
 
 void Ltaha::specialability(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame) {
     if (myteam.get_energy() < 4) return;
-    
     if (!canusespecial()) {
         cout << "Not enough rage for Special Ability!" << endl;
         return;
     }
 
-    hero* lowestTarget = myTeam.getlowestone();
+    cout << "\"همه در جای خود! این منطقه آلوده است!\"" << endl;
+
+    hero* lowestTarget = myteam.getlowestone();
     if (lowestTarget != nullptr) {
         lowestTarget->heal(200);
+        cout << lowestTarget->getName() << " healed for 200 HP!" << endl;
     }
     
     resetrage();
-    myTeam.decrease_energy(4);
+    myteam.decrease_energy(4);
 }
 
-bool Ltaha::counting_rage(hero& target) {
-    if (!target.canusespecial()) {
-        target.increaserage();
-        return false;
+void Ltaha::updateHealing(team& myteam) {
+    if (healingRoundsLeft > 0 && !healingTarget.empty()) {
+        vector<hero*> heroes = myteam.getheroes();
+        for (hero* h : heroes) {
+            if (h->getName() == healingTarget && h->isAlive()) {
+                h->heal(40);
+                cout << h->getName() << " healed for 40 HP from little taha!" << endl;
+                break;
+            }
+        }
+        healingRoundsLeft--;
+        if (healingRoundsLeft == 0) {
+            healingTarget = "";
+        }
     }
-    target.resetrage();
-    return true;
 }

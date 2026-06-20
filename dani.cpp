@@ -37,13 +37,15 @@ void danigolang::ability2(hero& enemyTarget, hero& allyTarget, team& enemyteam, 
 
 void danigolang::specialability(hero& enemyTarget, hero& allyTarget, team& enemyteam, team& myteam, game& currentGame) {
     if (myteam.get_energy() < 4) return;
+    if (!canusespecial()) return;
 
-    if (!canusespecial())
-        return;
+    cout << "\"هیچ‌کس از این خط رد نمی‌شه!\"" << endl;
 
     hero* ally = myteam.getlowestone();
-    if (ally)
+    if (ally) {
         ally->addshield(250, 2);
+        cout << ally->getName() << " received a 250 HP shield for 2 turns!" << endl;
+    }
 
     resetrage();
     myteam.decrease_energy(4);
