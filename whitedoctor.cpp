@@ -33,7 +33,7 @@ void WhiteDoctor::specialability(hero& enemyTarget, hero& allyTarget, team& enem
     }
     
     int currentRound = currentGame.getround();
-    if (currentRound - doctorLastUsedRound < 4) {
+    if ( doctorLastUsedRound != -4 && (currentRound - doctorLastUsedRound < 4)){
         cout << "Special ability cooldown: " << 4 - (currentRound - doctorLastUsedRound) << " rounds left" << endl;
         return;
     }
