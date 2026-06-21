@@ -64,5 +64,8 @@ void WhiteDoctor::specialability(hero& enemyTarget, hero& allyTarget, team& enem
 void WhiteDoctor::updateDoping() {
     if (dopingRoundsLeft > 0) {
         dopingRoundsLeft--;
+        if (dopingRoundsLeft == 0) {
+            dopingTarget = "";
+        }
     }
 }
